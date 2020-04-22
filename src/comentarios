@@ -1,0 +1,13 @@
+formularios reativos vem em contraponto aos formulários guiados
+por template.
+
+Isso pq o formulário reativos garante a previsibilidade de dados,
+já que trabalha com o padrão de projeto Observer. Você saberá como o dado deve se  comportar, ja que escreverá as funções de mudanças no observers.
+ 
+Quando ocorre uma mudança no reativo, essa mudança é passada para o assunto (subjects) que acionara os observadores (observers) que farão as mudanças necessárias. 
+
+Como tudo isso funciona atraves de chamadas de sistema, a forma como os dados se alteram tambem mudam. Deixa de ser diretamente (template-driven) e passa a ser por funções. Logo, maior garantia da qualidade do dados. 
+
+É praticamente a diferença entre mudanças por variaveis encapsuladas (reativas) e acesso diretamente ao dado (template-driven)
+
+alterações de input fará que que nasça uma nova instancia do objeto (instancia por ponteiro, como ocorre com o git), assim, é comum ler que formularios reativos sao imutaveis. 
