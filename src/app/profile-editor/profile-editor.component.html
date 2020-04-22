@@ -1,11 +1,50 @@
-<form [formGroup]="profileForm">
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <button (click)="test()">Teste</button>
+  <button type="reset">Limpar</button>
+
 <label for='firstName'>
   First Name:
 </label>
-<input id='firstName' [formControlName]="firstName">
+<input id='firstName' formControlName="firstName" required>
 
 <label for='lastName'>
   Last Name:
 </label>
-<input id='lastName'[formControlName]="lastName">
+<input id='lastName' formControlName="lastName">
+
+<div formGroupName="address">
+  <h3>Address</h3>
+
+  <label>
+    Street:
+    <input type="text" formControlName="street">
+  </label>
+
+  <label>
+    City:
+    <input type="text" formControlName="city">
+  </label>
+  
+  <label>
+    State:
+    <input type="text" formControlName="state">
+  </label>
+
+  <label>
+    Zip Code:
+    <input type="text" formControlName="zip">
+  </label>
+</div>
+
+
+<!--
+  Cada FormControl possui um atributo que define se o campo é válido ou não.
+  
+  Um formGroup possui um atribute que define se o conjunto de seus controls são válidos ou não. 
+
+  A condição do botão somente será ativado quando todos os valores dos controls forem verdadeiras.
+
+ -->
+<button type="submit" [disabled]="!profileForm.valid">Enviar</button>
+
 </form>

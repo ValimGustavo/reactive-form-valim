@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormControl, Form, Validators } from '@angular/forms'
+import { FormBuilder, Validator } from '@angular/forms'
 
 @Component({
   selector: 'app-profile-editor',
@@ -17,14 +18,58 @@ export class ProfileEditorComponent implements OnInit {
     Array: forma dinamica de se declarar um FormGroup. Nele, pode ocorrer adições ou remoções de formControls.
 
 
- */
-  private profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl('')
+  FormGroup aceitam tanto formControl individuais quanto outros FormGroup
+
+  para acessar os controls.
+
+  <FormGroup>.controls.[name_do_control]
+*/
+
+  private profileForm = this.formBuilder.group({
+    firstName: ['', Validators.required],
+    lastName: [''],
+
+    address: this.formBuilder.group({
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: [''],
+    })
   })
-  constructor() { }
+
+  // private profileForm = new FormGroup({
+  //   firstName: new FormControl(''),
+  //   lastName: new FormControl(''),
+    
+  //   address: new FormGroup({
+  //     street: new FormControl(''),
+  //     city: new FormControl(''),
+  //     state: new FormControl(''),
+  //     zip: new FormControl('')
+  //   })
+  // })
+
+  constructor(private formBuilder:FormBuilder = new FormBuilder()) { 
+
+  }
 
   ngOnInit() {
   }
 
+  onSubmit(){
+    console.warn(this.profileForm.value)
+  }
+
+  updatedProfile(){
+    this.profileForm.patchValue({
+      firstName:"functionUpdated",
+      address: {
+        street:"functionUpdated"
+      }
+    })
+  }
+
+  test(){
+    this.updatedProfile()
+  }
 }
