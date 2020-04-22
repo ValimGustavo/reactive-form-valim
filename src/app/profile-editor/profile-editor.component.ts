@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Form, Validators } from '@angular/forms'
+import { FormGroup, FormControl, Form, Validators, FormArray } from '@angular/forms'
 import { FormBuilder, Validator } from '@angular/forms'
 
 @Component({
@@ -25,6 +25,8 @@ export class ProfileEditorComponent implements OnInit {
   <FormGroup>.controls.[name_do_control]
 */
 
+
+
   private profileForm = this.formBuilder.group({
     firstName: ['', Validators.required],
     lastName: [''],
@@ -34,9 +36,14 @@ export class ProfileEditorComponent implements OnInit {
       city: [''],
       state: [''],
       zip: [''],
-    })
+    }),
+    //Criação de um grupo dinamico atravez de arrays.
+    aliase: this.formBuilder.array([
+      this.formBuilder.control('')
+    ])
   })
 
+ 
   // private profileForm = new FormGroup({
   //   firstName: new FormControl(''),
   //   lastName: new FormControl(''),
@@ -67,6 +74,10 @@ export class ProfileEditorComponent implements OnInit {
         street:"functionUpdated"
       }
     })
+  },
+
+  get aliase(){
+    return this.profileForm.get('aliase') as FormArray
   }
 
   test(){
